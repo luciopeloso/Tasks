@@ -4,11 +4,9 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
-import androidx.annotation.RequiresApi
 import com.devmasterteam.tasks.R
 import com.devmasterteam.tasks.service.constants.TaskConstants
 import com.devmasterteam.tasks.service.listener.APIListener
-import com.devmasterteam.tasks.service.model.PriorityModel
 import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback

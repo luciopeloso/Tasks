@@ -41,7 +41,6 @@ class TaskListViewModel(application: Application) : AndroidViewModel(application
             }
 
             override fun onFailure(failure: String) {
-                TODO("Not yet implemented")
             }
         }
 
@@ -67,7 +66,7 @@ class TaskListViewModel(application: Application) : AndroidViewModel(application
 
     fun status(id: Int, complete: Boolean) {
 
-        val listener = object: APIListener<Boolean>{
+        val listener = object : APIListener<Boolean> {
             override fun onSuccess(result: Boolean) {
                 list(taskFilter)
             }
@@ -79,7 +78,6 @@ class TaskListViewModel(application: Application) : AndroidViewModel(application
 
         if (complete) {
             taskRepository.complete(id, listener)
-
         } else {
             taskRepository.undo(id, listener)
         }

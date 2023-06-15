@@ -48,9 +48,9 @@ class MainActivity : AppCompatActivity() {
         observe()
     }
 
-    override fun onResume() {
-        super.onResume()
-    }
+//    override fun onResume() {
+//        super.onResume()
+//    }
 
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
@@ -69,7 +69,7 @@ class MainActivity : AppCompatActivity() {
 
         navView.setNavigationItemSelectedListener {
 
-            if(it.itemId == R.id.nav_logout){
+            if (it.itemId == R.id.nav_logout) {
                 viewModel.logout()
                 startActivity(Intent(applicationContext, LoginActivity::class.java))
                 finish()
@@ -84,7 +84,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun observe() {
-        viewModel.name.observe(this){
+        viewModel.name.observe(this) {
             val header = binding.navView.getHeaderView(0)
             header.findViewById<TextView>(R.id.text_name).text = it
 

@@ -14,14 +14,14 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     private val _name = MutableLiveData<String>()
     val name: LiveData<String> = _name
 
-    fun logout(){
+    fun logout() {
         securityPreferences.remove(TaskConstants.SHARED.TOKEN_KEY)
         securityPreferences.remove(TaskConstants.SHARED.PERSON_KEY)
         securityPreferences.remove(TaskConstants.SHARED.PERSON_NAME)
 
     }
 
-    fun loadUserName(){
+    fun loadUserName() {
         _name.value = securityPreferences.get(TaskConstants.SHARED.PERSON_NAME)
     }
 

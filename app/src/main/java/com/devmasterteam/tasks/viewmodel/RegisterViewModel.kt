@@ -1,6 +1,7 @@
 package com.devmasterteam.tasks.viewmodel
 
 import android.app.Application
+import android.app.Person
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -18,7 +19,7 @@ class RegisterViewModel(application: Application) : AndroidViewModel(application
     private val securityPreferences = SecurityPreferences(application.applicationContext)
 
     private val _user = MutableLiveData<ValidationModel>()
-    val user: MutableLiveData<ValidationModel> = _user
+    val user: LiveData<ValidationModel> = _user
 
     fun create(name: String, email: String, password: String) {
         personRepository.create(name, email, password, object : APIListener<PersonModel>{

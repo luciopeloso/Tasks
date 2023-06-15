@@ -9,11 +9,9 @@ class ValidationModel(message: String = "") {
             validationMessage = message
             status = false
         }
-
     }
 
     fun status() = status
-
     fun message() = validationMessage
 
 }

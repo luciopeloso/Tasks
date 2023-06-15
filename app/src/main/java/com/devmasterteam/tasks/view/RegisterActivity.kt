@@ -27,6 +27,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
         // Eventos
         binding.buttonSave.setOnClickListener(this)
 
+        observe()
         // Layout
         setContentView(binding.root)
     }

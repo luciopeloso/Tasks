@@ -1,6 +1,5 @@
 package com.devmasterteam.tasks.view
 
-import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -18,7 +17,7 @@ import com.devmasterteam.tasks.service.model.TaskModel
 import com.devmasterteam.tasks.viewmodel.RegisterViewModel
 import com.devmasterteam.tasks.viewmodel.TaskFormViewModel
 import java.text.SimpleDateFormat
-import java.util.Calendar
+import java.util.*
 
 class TaskFormActivity : AppCompatActivity(), View.OnClickListener,
     DatePickerDialog.OnDateSetListener {
@@ -26,7 +25,6 @@ class TaskFormActivity : AppCompatActivity(), View.OnClickListener,
     private lateinit var viewModel: TaskFormViewModel
     private lateinit var binding: ActivityTaskFormBinding
 
-    @SuppressLint("SimpleDateFormat")
     private val dateFormat = SimpleDateFormat("dd/MM/yyyy")
     private var listPriority: List<PriorityModel> = mutableListOf()
     private var taskIdentification = 0
@@ -68,21 +66,18 @@ class TaskFormActivity : AppCompatActivity(), View.OnClickListener,
         binding.buttonDate.text = dueDate
     }
 
-    private fun loadDataFromActivity(){
+    private fun loadDataFromActivity() {
         val bundle = intent.extras
-        if(bundle != null){
+        if (bundle != null) {
             taskIdentification = bundle.getInt(TaskConstants.BUNDLE.TASKID)
             viewModel.load(taskIdentification)
-        } else {
-
         }
-
     }
 
-    private fun getIndex(priorityId: Int): Int{
+    private fun getIndex(priorityId: Int): Int {
         var index = 0
-        for(l in listPriority){
-            if(l.id == priorityId){
+        for (l in listPriority) {
+            if (l.id == priorityId) {
                 break
             }
             index++
@@ -104,7 +99,7 @@ class TaskFormActivity : AppCompatActivity(), View.OnClickListener,
         viewModel.taskSave.observe(this) {
             if (it.status()) {
 
-                if(taskIdentification == 0){
+                if (taskIdentification == 0) {
                     toast("Tarefa criada com sucesso!")
                 } else {
                     toast("Tarefa atualizada com sucesso!")
@@ -115,7 +110,7 @@ class TaskFormActivity : AppCompatActivity(), View.OnClickListener,
             }
         }
 
-        viewModel.task.observe(this){
+        viewModel.task.observe(this) {
             binding.editDescription.setText(it.description)
             binding.checkComplete.isChecked = it.complete
             binding.spinnerPriority.setSelection(getIndex(it.priorityId))
@@ -124,15 +119,15 @@ class TaskFormActivity : AppCompatActivity(), View.OnClickListener,
             binding.buttonDate.text = SimpleDateFormat("dd/MM/yyyy").format(date)
         }
 
-        viewModel.taskLoad.observe(this){
-            if(!it.status()){
+        viewModel.taskLoad.observe(this) {
+            if (!it.status()) {
                 toast(it.message())
                 finish()
             }
         }
     }
 
-    private fun toast(str: String){
+    private fun toast(str: String) {
         Toast.makeText(applicationContext, str, Toast.LENGTH_SHORT).show()
     }
 
@@ -151,12 +146,10 @@ class TaskFormActivity : AppCompatActivity(), View.OnClickListener,
     }
 
     private fun handleDate() {
-        var calendar = Calendar.getInstance()
+        val calendar = Calendar.getInstance()
         val year = calendar.get(Calendar.YEAR)
         val mouth = calendar.get(Calendar.MONTH)
         val day = calendar.get(Calendar.DAY_OF_MONTH)
         DatePickerDialog(this, this, year, mouth, day).show()
     }
-
-
 }

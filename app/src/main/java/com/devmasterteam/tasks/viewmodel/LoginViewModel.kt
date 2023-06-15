@@ -13,6 +13,7 @@ import com.devmasterteam.tasks.service.repository.PersonRepository
 import com.devmasterteam.tasks.service.repository.PriorityRepository
 import com.devmasterteam.tasks.service.repository.SecurityPreferences
 import com.devmasterteam.tasks.service.repository.remote.RetrofitClient
+import kotlin.math.log
 
 class LoginViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -60,8 +61,8 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
         val logged = (token != "" && person != "")
         _loggedUser.value = logged
 
-        if(!logged){
-            priorityRepository.list(object : APIListener<List<PriorityModel>>{
+        if (!logged) {
+            priorityRepository.list(object : APIListener<List<PriorityModel>> {
                 override fun onSuccess(result: List<PriorityModel>) {
                     priorityRepository.save(result)
                 }
